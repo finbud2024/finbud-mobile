@@ -5,7 +5,6 @@
 ## Cấu trúc Dự án
 
 ```
-.
 ├── frontend/               # Ứng dụng di động React Native (Expo)
 │   ├── app/                # Mã nguồn chính của ứng dụng
 │   │   ├── components/     # Các thành phần giao diện có thể tái sử dụng
