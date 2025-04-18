@@ -34,7 +34,7 @@
 - **NativeWind** (Tailwind CSS for React Native)
 - **React Navigation** for navigation
 
-### Backend
+### Backend (Sample)
 
 - **Python + FastAPI** (API server)
 - **SQLAlchemy** (ORM)
