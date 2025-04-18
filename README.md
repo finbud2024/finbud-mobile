@@ -1,4 +1,4 @@
-# Finbud
+# Finbud (Mobile)
 
 Ứng dụng giao dịch tự động với đề xuất đầu tư được hỗ trợ bởi AI.
 
