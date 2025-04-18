@@ -1,29 +1,29 @@
-# AutoTrade AI
+# Finbud
 
-An automated trading application with AI-powered investment recommendations.
+Ứng dụng giao dịch tự động với đề xuất đầu tư được hỗ trợ bởi AI.
 
-## Project Structure
+## Cấu trúc Dự án
 
 ```
 .
-├── frontend/               # React Native (Expo) mobile app
-│   ├── app/                # App source code
-│   │   ├── components/     # Reusable UI components
-│   │   ├── screens/        # App screens
-│   │   ├── navigation/     # Navigation configuration
-│   │   ├── services/       # API and other services
-│   │   └── utils/          # Utility functions
-│   ├── assets/             # Static assets
-│   └── ...                 # Expo configuration files
+├── frontend/               # Ứng dụng di động React Native (Expo)
+│   ├── app/                # Mã nguồn chính của ứng dụng
+│   │   ├── components/     # Các thành phần giao diện có thể tái sử dụng
+│   │   ├── screens/        # Các màn hình trong ứng dụng
+│   │   ├── navigation/     # Cấu hình điều hướng
+│   │   ├── services/       # Các dịch vụ API và dịch vụ khác
+│   │   └── utils/          # Các hàm tiện ích
+│   ├── assets/             # Tài nguyên tĩnh
+│   └── ...                 # Các tệp cấu hình của Expo
 │
-└── backend/                # Python FastAPI backend
-    ├── app/                # App source code
-    │   ├── routers/        # API route handlers
-    │   ├── models/         # Database models
-    │   ├── schemas/        # Pydantic schemas for validation
-    │   ├── services/       # Business logic services
-    │   └── database/       # Database connection and configs
-    └── requirements.txt    # Python dependencies
+└── backend/                # Backend sử dụng Python FastAPI
+    ├── app/                # Mã nguồn chính của backend
+    │   ├── routers/        # Xử lý các route API
+    │   ├── models/         # Các mô hình cơ sở dữ liệu
+    │   ├── schemas/        # Schema Pydantic để kiểm tra dữ liệu
+    │   ├── services/       # Các dịch vụ xử lý nghiệp vụ
+    │   └── database/       # Kết nối và cấu hình cơ sở dữ liệu
+    └── requirements.txt    # Danh sách thư viện Python cần cài đặt
 ```
 
 ## Tech Stack
@@ -45,7 +45,7 @@ An automated trading application with AI-powered investment recommendations.
 
 ### Frontend Setup
 
-1. Navigate to the frontend directory:
+1. Di chuyển vào thư mục frontend:
 
    ```bash
    cd frontend
@@ -63,11 +63,11 @@ An automated trading application with AI-powered investment recommendations.
    npm start
    ```
 
-4. Use Expo Go app on your mobile device to scan the QR code or press 'i' to open in iOS simulator (macOS only) or 'a' for Android emulator.
+4. Dùng ứng dụng Expo Go trên điện thoại để quét mã QR hoặc nhấn 'i' để mở trình giả lập iOS (chỉ dùng được trên macOS) hoặc 'a' cho giả lập Android.
 
 ### Backend Setup
 
-1. Navigate to the backend directory:
+1. Di chuyển vào thư mục backend:
 
    ```bash
    cd backend
@@ -97,13 +97,3 @@ An automated trading application with AI-powered investment recommendations.
    ```bash
    uvicorn app.main:app --reload
    ```
-
-6. The API will be available at `http://localhost:8000` and the API documentation at `http://localhost:8000/docs`
-
-## Features
-
-- Trading strategy selection (Conservative, Moderate, Aggressive)
-- Automated stock investments based on AI recommendations
-- Portfolio tracking and performance monitoring
-- Market data visualization
-- Investment history and returns analysis
