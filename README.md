@@ -28,7 +28,7 @@
 
 ## Tech Stack
 
-### Frontend (Mobile App)
+### Frontend
 
 - **React Native** (via Expo)
 - **NativeWind** (Tailwind CSS for React Native)
