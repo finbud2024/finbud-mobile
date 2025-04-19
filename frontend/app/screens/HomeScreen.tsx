@@ -1,211 +1,196 @@
-import React, { useState } from "react";
-import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import StrategyCard from "../components/StrategyCard";
-import Button from "../components/Button";
-import InvestmentItem from "../components/InvestmentItem";
+import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+// import UserInput from "../components/UserInput";
+// import TutorialOverlay from "../components/tutorial/TutorialOverlay";
 
-const HomeScreen = () => {
-  const [selectedStrategy, setSelectedStrategy] = useState<string | null>(null);
-  const [capitalAmount, setCapitalAmount] = useState("");
+// TODO: Import or define your FAQs data and tutorial steps
+import faqs from "../data/faqs";
 
-  const strategies = [
-    {
-      id: "conservative",
-      title: "Conservative",
-      description: "Low risk, steady growth",
-      returnTarget: "15%",
-      maxDuration: "30 days",
-      type: "conservative" as const,
-    },
-    {
-      id: "moderate",
-      title: "Moderate",
-      description: "Balanced risk and reward",
-      returnTarget: "20%",
-      maxDuration: "10 days",
-      type: "moderate" as const,
-    },
-    {
-      id: "aggressive",
-      title: "Aggressive",
-      description: "Higher risk, greater returns",
-      returnTarget: "25%",
-      maxDuration: "5 days",
-      type: "aggressive" as const,
-    },
-  ];
+const FinbudHomeScreen: React.FC = () => {
+  const navigation = useNavigation();
 
-  const investments = [
-    {
-      symbol: "NVDA",
-      type: "aggressive" as const,
-      quantity: 8.4367,
-      status: "closed" as const,
-      sold: 0,
-    },
-    {
-      symbol: "MSFT",
-      type: "conservative" as const,
-      quantity: 2.5589,
-      status: "closed" as const,
-      sold: 0,
-    },
-  ];
+  // Placeholder for typing effect or static
+  const [signInTitle, setSignInTitle] = useState<string>(
+    "Anytime answers for finance questions with FinBud"
+  );
+
+  // FAQs state
+  const [expandedItem, setExpandedItem] = useState<number | null>(null);
+
+  const toggleExpansion = (index: number) => {
+    setExpandedItem(expandedItem === index ? null : index);
+  };
+
+  const chatNow = () => {
+    // TODO: Replace with proper auth check
+    // navigation.navigate("ChatView");
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.content}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.title}>Finbud</Text>
-          </View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        {/* Intro Section */}
+        <View style={styles.introContainer}>
+          <Text style={styles.title}>Empowering smarter finance decisions</Text>
+          <Text style={styles.description}>{signInTitle}</Text>
+          {/* <UserInput onSendMessage={chatNow} style={styles.searchBar} /> */}
+        </View>
 
-          {/* Start New Strategy Section */}
-          <View style={styles.card}>
-            <View style={styles.sectionHeader}>
-              <View style={styles.sectionNumberCircle}>
-                <Text style={styles.sectionNumber}>1</Text>
-              </View>
-              <Text style={styles.sectionTitle}>Start New Strategy</Text>
-            </View>
-
-            <Text style={styles.label}>Select Strategy:</Text>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={styles.strategyCards}
-            >
-              {strategies.map((strategy) => (
-                <StrategyCard
-                  key={strategy.id}
-                  title={strategy.title}
-                  description={strategy.description}
-                  returnTarget={strategy.returnTarget}
-                  maxDuration={strategy.maxDuration}
-                  type={strategy.type}
-                  selected={selectedStrategy === strategy.id}
-                  onSelect={() => setSelectedStrategy(strategy.id)}
-                />
-              ))}
-            </ScrollView>
-
-            <Text style={styles.label}>Capital Allocation ($):</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              placeholder="Enter amount"
-              placeholderTextColor="#9CA3AF"
-              value={capitalAmount}
-              onChangeText={setCapitalAmount}
-            />
-
-            <Button
-              title="START STRATEGY"
-              onPress={() => {}}
-              disabled={!selectedStrategy || !capitalAmount}
-            />
-          </View>
-
-          {/* Auto Investments Section */}
-          <View style={styles.card}>
-            <View style={styles.sectionHeader}>
-              <View style={styles.sectionNumberCircle}>
-                <Text style={styles.sectionNumber}>2</Text>
-              </View>
-              <Text style={styles.sectionTitle}>Auto Investments</Text>
-            </View>
-
-            {investments.map((investment, index) => (
-              <InvestmentItem
-                key={index}
-                symbol={investment.symbol}
-                type={investment.type}
-                quantity={investment.quantity}
-                status={investment.status}
-                sold={investment.sold}
+        {/* Partnering Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionHeader}>Partnering to Achieve Financial Goals</Text>
+          <View style={styles.gridContainer}>
+            {/* Box 1 */}
+            <View style={styles.gridBox}>
+              <Image
+                source={require("../assets/home-page/Lightbulb.png")}
+                style={styles.icon}
               />
+              <Text style={styles.gridTitle}>Enhance Your Financial Awareness</Text>
+              <Text style={styles.gridText}>
+                Finbud's advanced AI chatbot will help you review, explore financial topics, and answer all your
+                questions.
+              </Text>
+            </View>
+            {/* Box 2 */}
+            <View style={styles.gridBox}>
+              <Image
+                source={require("../assets/home-page/Bars.png")}
+                style={styles.icon}
+              />
+              <Text style={styles.gridTitle}>Optimize Your Financial Planning</Text>
+              <Text style={styles.gridText}>
+                Finbud helps you track and manage expenses, record income and spending, and tailor financial management to
+                your specific goals.
+              </Text>
+            </View>
+            {/* Box 3 */}
+            <View style={styles.gridBox}>
+              <Image
+                source={require("../assets/home-page/CircleArrowUp.png")}
+                style={styles.icon}
+              />
+              <Text style={styles.gridTitle}>Maximize Your Investment Efficiency</Text>
+              <Text style={styles.gridText}>
+                Finbud provides a comprehensive overview of the financial market, guiding you to optimize your capital confidently.
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Technology Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionHeader}>Easily notice the impact</Text>
+          <View style={styles.technologyGrid}>
+            {[
+              { title: "Savings Increase", detail: "20% average per user" },
+              { title: "Financial Awareness", detail: "25% increase" },
+              { title: "Debt Reduction", detail: "30% after 1 year" },
+              { title: "Improved Credit Score", detail: "6 months within" },
+            ].map((card, idx) => (
+              <View key={idx} style={styles.technologyCard}>
+                <Text style={styles.cardTitle}>{card.title}</Text>
+                <Text style={styles.cardContent}>{card.detail}</Text>
+              </View>
             ))}
           </View>
         </View>
+
+        {/* FAQ Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionHeader}>Frequently Asked Questions</Text>
+          {faqs.map((item, index) => (
+            <View
+              key={index}
+              style={[styles.faqItem, expandedItem === index && styles.faqExpanded]}
+            >
+              <TouchableOpacity onPress={() => toggleExpansion(index)}>
+                <Text style={styles.faqQuestion}>{item.question}</Text>
+              </TouchableOpacity>
+              {expandedItem === index && (
+                <Text style={styles.faqAnswer}>{item.answer}</Text>
+              )}
+            </View>
+          ))}
+        </View>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Image
+            source={require("../assets/home-page/FinBudPix.png")}
+            style={styles.footerImage}
+          />
+          <Text style={styles.footerText}>
+            © Copyright 2025, All Rights Reserved by FinBud
+          </Text>
+        </View>
       </ScrollView>
+
+      {/* Tutorial Overlay */}
+      { //<TutorialOverlay
+        // steps={"a"}/* TODO: provide tutorialSteps array */
+        //storageKey="finbudHomeTutorialShown"
+        //autoStart={true}
+        //onTutorialCompleted={chatNow}
+      ///>
+      }
     </SafeAreaView>
   );
 };
 
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000000",
-  },
-  scrollView: {
-    flex: 1,
-  },
-  content: {
-    padding: 16,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#F9FAFB",
-  },
-  card: {
+  container: { flex: 1, backgroundColor: "#000" },
+  scrollView: { flexGrow: 1 },
+  introContainer: { padding: 20, alignItems: "center" },
+  title: { fontSize: 28, fontWeight: "bold", color: "#F9FAFB", textAlign: "center" },
+  description: { fontSize: 18, color: "#D1D5DB", marginVertical: 10, textAlign: "center" },
+  searchBar: { width: "100%", marginVertical: 10 },
+  section: { padding: 20 },
+  sectionHeader: { fontSize: 22, fontWeight: "600", color: "#F9FAFB", marginBottom: 12 },
+  gridContainer: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
+  gridBox: {
+    width: "30%",
     backgroundColor: "#121212",
     borderRadius: 12,
-    padding: 16,
-    marginBottom: 24,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
-    borderColor: "#2C2C2C",
-    borderWidth: 1,
-  },
-  sectionHeader: {
-    flexDirection: "row",
-    alignItems: "center",
+    padding: 15,
     marginBottom: 16,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#2C2C2C",
   },
-  sectionNumberCircle: {
-    width: 24,
-    height: 24,
+  icon: { width: 40, height: 40, marginBottom: 10 },
+  gridTitle: { fontSize: 16, fontWeight: "bold", color: "#F9FAFB", marginBottom: 8, textAlign: "center" },
+  gridText: { fontSize: 14, color: "#D1D5DB", textAlign: "center" },
+  technologyGrid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
+  technologyCard: {
+    width: "45%",
+    backgroundColor: "#121212",
     borderRadius: 12,
-    backgroundColor: "#EBF5FF",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 8,
-  },
-  sectionNumber: {
-    color: "#3B82F6",
-    fontWeight: "bold",
-  },
-  sectionTitle: {
-    fontWeight: "600",
-    color: "#F9FAFB",
-  },
-  label: {
-    marginBottom: 8,
-    color: "#D1D5DB",
-  },
-  strategyCards: {
+    padding: 15,
     marginBottom: 16,
-  },
-  input: {
     borderWidth: 1,
     borderColor: "#2C2C2C",
+  },
+  cardTitle: { fontSize: 16, fontWeight: "bold", color: "#F9FAFB", marginBottom: 5 },
+  cardContent: { fontSize: 14, color: "#D1D5DB" },
+  faqItem: {
+    backgroundColor: "#121212",
     borderRadius: 8,
     padding: 12,
-    marginBottom: 16,
-    backgroundColor: "#1E1E1E",
-    color: "#F9FAFB",
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#2C2C2C",
   },
+  faqExpanded: { backgroundColor: "#1E1E1E" },
+  faqQuestion: { fontSize: 16, fontWeight: "600", color: "#F9FAFB" },
+  faqAnswer: { fontSize: 14, color: "#D1D5DB", marginTop: 8 },
+  footer: { alignItems: "center", padding: 20, borderTopWidth: 1, borderColor: "#2C2C2C" },
+  footerImage: { width: 80, height: 80, marginBottom: 10 },
+  footerText: { fontSize: 12, color: "#777" },
 });
 
-export default HomeScreen;
+export default FinbudHomeScreen;
