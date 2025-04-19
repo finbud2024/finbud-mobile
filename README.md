@@ -85,13 +85,7 @@
    pip install -r requirements.txt
    ```
 
-4. Create a `.env` file in the backend directory with the following content:
-
-   ```
-   DATABASE_URL=postgresql://username:password@localhost:5432/autotrade
-   ```
-
-5. Run the FastAPI server:
+4. Run the FastAPI server:
 
    ```bash
    uvicorn app.main:app --reload
