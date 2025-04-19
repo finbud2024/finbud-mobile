@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Input from "../components/Input";
+
 // import UserInput from "../components/UserInput";
 // import TutorialOverlay from "../components/tutorial/TutorialOverlay";
 
@@ -15,6 +17,8 @@ const FinbudHomeScreen: React.FC = () => {
   const [signInTitle, setSignInTitle] = useState<string>(
     "Anytime answers for finance questions with FinBud"
   );
+
+  const [searchText, setSearchText] = useState<string>("");
 
   // FAQs state
   const [expandedItem, setExpandedItem] = useState<number | null>(null);
@@ -35,6 +39,14 @@ const FinbudHomeScreen: React.FC = () => {
         <View style={styles.introContainer}>
           <Text style={styles.title}>Empowering smarter finance decisions</Text>
           <Text style={styles.description}>{signInTitle}</Text>
+          <Input
+            value={searchText}
+            onChangeText={setSearchText}
+            placeholder="Search FinBud..."
+            // optionally pass icons:
+            // leftIcon={<YourSearchIcon />}
+            // rightIcon={<YourClearOrSendIcon />}
+          />
           {/* <UserInput onSendMessage={chatNow} style={styles.searchBar} /> */}
         </View>
 
@@ -118,10 +130,13 @@ const FinbudHomeScreen: React.FC = () => {
 
         {/* Footer */}
         <View style={styles.footer}>
-          <Image
-            source={require("../assets/home-page/FinBudPix.png")}
-            style={styles.footerImage}
-          />
+          <View style={styles.footerImageWrapper}>
+            <Image
+              source={require('../assets/home-page/FinBudPix.png')}
+              style={styles.footerImage}
+              resizeMode="contain"
+            />
+          </View>
           <Text style={styles.footerText}>
             © Copyright 2025, All Rights Reserved by FinBud
           </Text>
@@ -134,7 +149,7 @@ const FinbudHomeScreen: React.FC = () => {
         //storageKey="finbudHomeTutorialShown"
         //autoStart={true}
         //onTutorialCompleted={chatNow}
-      ///>
+        ///>
       }
     </SafeAreaView>
   );
@@ -143,54 +158,71 @@ const FinbudHomeScreen: React.FC = () => {
 
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000" },
+  container: { flex: 1, backgroundColor: "#fff" },
   scrollView: { flexGrow: 1 },
   introContainer: { padding: 20, alignItems: "center" },
-  title: { fontSize: 28, fontWeight: "bold", color: "#F9FAFB", textAlign: "center" },
-  description: { fontSize: 18, color: "#D1D5DB", marginVertical: 10, textAlign: "center" },
+  title: { fontSize: 28, fontWeight: "bold", color: "#111", textAlign: "center" },
+  description: { fontSize: 18, color: "#555", marginVertical: 10, textAlign: "center" },
   searchBar: { width: "100%", marginVertical: 10 },
   section: { padding: 20 },
-  sectionHeader: { fontSize: 22, fontWeight: "600", color: "#F9FAFB", marginBottom: 12 },
+  sectionHeader: { fontSize: 22, fontWeight: "600", color: "#111", marginBottom: 12 },
   gridContainer: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
   gridBox: {
     width: "30%",
-    backgroundColor: "#121212",
+    backgroundColor: "#fff",
     borderRadius: 12,
     padding: 15,
     marginBottom: 16,
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#2C2C2C",
+    borderColor: "#ccc",
   },
   icon: { width: 40, height: 40, marginBottom: 10 },
-  gridTitle: { fontSize: 16, fontWeight: "bold", color: "#F9FAFB", marginBottom: 8, textAlign: "center" },
-  gridText: { fontSize: 14, color: "#D1D5DB", textAlign: "center" },
+  gridTitle: { fontSize: 16, fontWeight: "bold", color: "#111", marginBottom: 8, textAlign: "center" },
+  gridText: { fontSize: 14, color: "#555", textAlign: "center" },
   technologyGrid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
   technologyCard: {
     width: "45%",
-    backgroundColor: "#121212",
+    backgroundColor: "#fff",
     borderRadius: 12,
     padding: 15,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: "#2C2C2C",
+    borderColor: "#ccc",
   },
-  cardTitle: { fontSize: 16, fontWeight: "bold", color: "#F9FAFB", marginBottom: 5 },
-  cardContent: { fontSize: 14, color: "#D1D5DB" },
+  cardTitle: { fontSize: 16, fontWeight: "bold", color: "#111", marginBottom: 5 },
+  cardContent: { fontSize: 14, color: "#555" },
   faqItem: {
-    backgroundColor: "#121212",
+    backgroundColor: "#fff",
     borderRadius: 8,
     padding: 12,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: "#2C2C2C",
+    borderColor: "#ccc",
   },
-  faqExpanded: { backgroundColor: "#1E1E1E" },
-  faqQuestion: { fontSize: 16, fontWeight: "600", color: "#F9FAFB" },
-  faqAnswer: { fontSize: 14, color: "#D1D5DB", marginTop: 8 },
-  footer: { alignItems: "center", padding: 20, borderTopWidth: 1, borderColor: "#2C2C2C" },
-  footerImage: { width: 80, height: 80, marginBottom: 10 },
-  footerText: { fontSize: 12, color: "#777" },
+  faqExpanded: { backgroundColor: "#f0f0f0" },
+  faqQuestion: { fontSize: 16, fontWeight: "600", color: "#111" },
+  faqAnswer: { fontSize: 14, color: "#555", marginTop: 8 },
+  footer: {
+    alignItems: 'center',
+    padding: 20,
+    borderTopWidth: 1,
+    borderColor: '#2C2C2C',
+  },
+
+  // wrapper that gives you “snug + margin”
+  footerImageWrapper: {
+    width: '90%',      // 90% of the footer’s inner width
+    marginVertical: 10, // a little space top & bottom
+  },
+
+  footerImage: {
+    width: '100%',     // fill the wrapper
+    height: undefined, // required when using aspectRatio
+    // aspectRatio: 2,  // ← replace with your logo’s (width/height)
+  },
+
+  footerText: { fontSize: 12, color: "#333" },
 });
 
 export default FinbudHomeScreen;
