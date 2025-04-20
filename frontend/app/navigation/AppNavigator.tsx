@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react";"react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, StyleSheet } from "react-native";
+import { Image, View, Text, StyleSheet } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
 
 const CustomDarkTheme = {
@@ -86,10 +86,12 @@ const AppNavigator = () => {
           name="Home"
           component={HomeStack}
           options={{
-            tabBarIcon: ({ color }: { color: string }) => (
-              <View style={styles.iconContainer}>
-                <Text style={[styles.iconText, { color }]}>🏠</Text>
-              </View>
+            tabBarIcon: ({ color, size }) => (
+              <Image
+                source={require("../assets/icons/home.png")}
+                style={[styles.iconImage, { tintColor: color, width: size, height: size }]}
+                resizeMode="contain"
+              />
             ),
           }}
         />
@@ -97,10 +99,12 @@ const AppNavigator = () => {
           name="Portfolio"
           component={PortfolioScreen}
           options={{
-            tabBarIcon: ({ color }: { color: string }) => (
-              <View style={styles.iconContainer}>
-                <Text style={[styles.iconText, { color }]}>📊</Text>
-              </View>
+            tabBarIcon: ({ color, size }) => (
+              <Image
+                source={require("../assets/icons/briefcase.png")}
+                style={[styles.iconImage, { tintColor: color, width: size, height: size }]}
+                resizeMode="contain"
+              />
             ),
           }}
         />
@@ -108,10 +112,12 @@ const AppNavigator = () => {
           name="Community"
           component={CommunityScreen}
           options={{
-            tabBarIcon: ({ color }: { color: string }) => (
-              <View style={styles.iconContainer}>
-                <Text style={[styles.iconText, { color }]}>👥</Text>
-              </View>
+            tabBarIcon: ({ color, size }) => (
+              <Image
+                source={require("../assets/icons/people.png")}
+                style={[styles.iconImage, { tintColor: color, width: size, height: size }]}
+                resizeMode="contain"
+              />
             ),
           }}
         />
@@ -119,10 +125,12 @@ const AppNavigator = () => {
           name="Learn"
           component={LearnScreen}
           options={{
-            tabBarIcon: ({ color }: { color: string }) => (
-              <View style={styles.iconContainer}>
-                <Text style={[styles.iconText, { color }]}>📚</Text>
-              </View>
+            tabBarIcon: ({ color, size }) => (
+              <Image
+                source={require("../assets/icons/mortarboard.png")}
+                style={[styles.iconImage, { tintColor: color, width: size, height: size }]}
+                resizeMode="contain"
+              />
             ),
           }}
         />
@@ -130,10 +138,12 @@ const AppNavigator = () => {
           name="Profile"
           component={ProfileScreen}
           options={{
-            tabBarIcon: ({ color }: { color: string }) => (
-              <View style={styles.iconContainer}>
-                <Text style={[styles.iconText, { color }]}>👤</Text>
-              </View>
+            tabBarIcon: ({ color, size }) => (
+              <Image
+                source={require("../assets/icons/user.png")}
+                style={[styles.iconImage, { tintColor: color, width: size, height: size }]}
+                resizeMode="contain"
+              />
             ),
           }}
         />
@@ -156,6 +166,10 @@ const styles = StyleSheet.create({
   },
   iconText: {
     fontSize: 20,
+  },
+  iconImage: {
+    width: 24,
+    height: 24,
   },
 });
 
