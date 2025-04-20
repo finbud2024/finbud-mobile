@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
         marginVertical: 8,
     },
     name: {
-        fontSize: 18,
+        fontSize: 16,  
         fontWeight: "bold",
-        color: "#1F2937",
+        color: "#111", 
         marginBottom: 8,
         fontFamily: "Noto sans",
     },

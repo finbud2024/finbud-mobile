@@ -4,6 +4,7 @@ import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, StyleSheet } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
+import AboutUsScreen from "../screens/AboutUsScreen";
 
 const CustomDarkTheme = {
   ...DarkTheme,
@@ -35,14 +36,6 @@ const CommunityScreen = () => {
   );
 };
 
-const LearnScreen = () => {
-  return (
-    <View style={[styles.placeholderScreen, { backgroundColor: "#000000" }]}>
-      <Text style={{ color: "#F9FAFB" }}>Learn Screen</Text>
-    </View>
-  );
-};
-
 const ProfileScreen = () => {
   return (
     <View style={[styles.placeholderScreen, { backgroundColor: "#000000" }]}>
@@ -62,6 +55,18 @@ const HomeStack = () => {
       }}
     >
       <Stack.Screen name="HomeMain" component={HomeScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const AboutUsStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="AboutUsMain" component={AboutUsScreen} />
     </Stack.Navigator>
   );
 };
@@ -116,8 +121,8 @@ const AppNavigator = () => {
           }}
         />
         <Tab.Screen
-          name="Learn"
-          component={LearnScreen}
+          name="About Us"
+          component={AboutUsScreen}
           options={{
             tabBarIcon: ({ color }: { color: string }) => (
               <View style={styles.iconContainer}>

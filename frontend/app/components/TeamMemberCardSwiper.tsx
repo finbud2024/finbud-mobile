@@ -7,7 +7,7 @@ type TeamMember = {
   name: string;
   role: string;
   description: string;
-  imageUrl: string;
+  image: any;
   linkedinUrl: string;
   githubUrl: string;
 };
@@ -26,13 +26,13 @@ const TeamMemberCardSwiper: React.FC<TeamMemberCardSwiperProps> = ({ teamMembers
         loop={true}
         nextButton={<Text style={styles.arrow}>{'>'}</Text>}
         prevButton={<Text style={styles.arrow}>{'<'}</Text>}
-        activeDotColor="#3B82F6"
-        dotColor="#6B7280"
+        activeDotColor="#777777"
+        dot={<View style={styles.customDot} />}
       >
         {teamMembers.map((member, index) => (
           <View key={index} style={styles.slide}>
             <Image
-              source={{  }}
+              source={member.image}
               style={styles.image}
               resizeMode="cover"
             />
@@ -56,26 +56,19 @@ const TeamMemberCardSwiper: React.FC<TeamMemberCardSwiperProps> = ({ teamMembers
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#ffffff", 
+    backgroundColor: "#ffffff",
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#ccc",
   },
-  sectionHeader: {
-    fontSize: 22,
-    fontWeight: "600",
-    color: "#F9FAFB",
-    marginBottom: 12,
-    fontFamily: "SpaceGrotesk-Bold",
-    textAlign: "center",
-  },
   swiper: {
-    height: 400, 
+    height: 420,
   },
   slide: {
     alignItems: "center",
   },
   image: {
+    marginTop: 20,
     width: 120,
     height: 120,
     borderRadius: 60,
@@ -98,12 +91,11 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    fontWeight: 300,
+    fontWeight: 700,
     color: "#555555",
     textAlign: "left",
     marginBottom: 12,
-    paddingRight: 40,
-    paddingLeft: 40,
+    paddingHorizontal: 40,
     fontFamily: "Noto sans",
   },
   socialLinks: {
@@ -112,15 +104,27 @@ const styles = StyleSheet.create({
   },
   socialLink: {
     fontSize: 14,
-    color: "#007BFF", 
+    color: "#007BFF",
     marginHorizontal: 10,
     textDecorationLine: "underline",
     fontFamily: "Noto sans",
   },
   arrow: {
     fontSize: 30,
-    color: "rgb(0, 122, 255)", 
+    color: "333333",
   },
+  customDot: {
+    backgroundColor: "transparent", 
+    borderWidth: 1, 
+    borderColor: "#777777",
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  }
 });
 
 export default TeamMemberCardSwiper;
