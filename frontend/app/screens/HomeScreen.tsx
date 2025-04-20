@@ -125,7 +125,7 @@ const FinbudHomeScreen: React.FC = () => {
           </View>
         </View>
 
-        
+
         {/* === Features Section === */}
         <View style={styles.featureSection}>
           <View style={styles.featureContainer}>
@@ -269,8 +269,10 @@ const styles = StyleSheet.create({
   },
   scrollView: { flex: 1 },
   introContainer: {
-    padding: 20,
-    alignItems: "center"
+    padding: 20,      // default all sides
+    paddingTop: 250,   // override just the top
+    paddingBottom: 350,
+    alignItems: "center",
   },
   contentContainer: { paddingVertical: 20 },
   title: {
